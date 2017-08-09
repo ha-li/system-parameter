@@ -1,0 +1,39 @@
+
+description = 'Custom Constraints'
+
+repositories {
+   mavenCentral ()
+}
+
+dependencies {
+}
+
+String basedir = project.getProjectDir ().getAbsolutePath()
+/*
+// these two go together
+ant.importBuild basedir + "/build-install-db.xml"
+task installDatabase(dependsOn: sqlplusexe){}
+*/
+
+// investigate more - maybe works
+/* task deployDb (type: Exec) {
+   commandLine './installer.sql'
+   standardOutput = new ByteArrayOutputStream ()
+   ext.output = {
+      return standardOutput.toString ()
+   }
+} */
+
+// does not work
+/* task installDb {
+   doLast {
+      //def sqlPlusCmd = "/Applications/oracle/instantclient_12_1/bin/sqlplus subadm/subadm@//localhost:1521/xe @dbcr/InstallDB.sql".execute()
+      //sqlPlusCmd.in.eachLine { line -> print line }
+   }
+} */
+
+// does not work
+/* task cmdDb (type: Exec) {
+   commandLine 'export', 'DYLD_LIBRARY_PATH=/Applications/oracle/instantclient_12_1/lib'
+   commandLine 'sh', '-c', '/Applications/oracle/instantclient_12_1/bin/sqlplus', 'subadm/subadm@localhost:1521/xe', '@dbcr/InstallDB.sql'
+} */
